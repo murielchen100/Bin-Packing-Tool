@@ -7,7 +7,7 @@ st.title("鑽石分包最佳化工具")
 diamond_file = st.file_uploader("上傳鑽石重量 Excel", type=["xlsx"])
 package_file = st.file_uploader("上傳分包規定 Excel", type=["xlsx"])
 
-tolerance = st.number_input("容許誤差 (ct)", value=0.003, step=0.001)
+tolerance = st.number_input("容許誤差 (ct)", value=0.003, step=0.001, format="%.3f")
 
 if diamond_file and package_file:
     diamonds_df = pd.read_excel(diamond_file)
@@ -47,3 +47,4 @@ if diamond_file and package_file:
     st.write("分配結果：")
     for res in results:
         st.write(f"分包{res['分包編號']}：{res['分配鑽石']}，總重：{res['總重']}")
+
