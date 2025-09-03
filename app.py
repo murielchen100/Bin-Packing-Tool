@@ -29,7 +29,7 @@ if diamond_file and package_file:
             combo = [diamonds[i] for i in combo_indices]
             if abs(sum(combo) - target) <= tolerance:
                 results.append({
-                    "分包編號": row['包裝編號'],
+                    "分包編號": row['用石編號'],
                     "分配鑽石": combo,
                     "總重": sum(combo)
                 })
@@ -39,7 +39,7 @@ if diamond_file and package_file:
 
         if not found:
             results.append({
-                "分包編號": row['包裝編號'],
+                "分包編號": row['用石編號'],
                 "分配鑽石": "找不到符合組合",
                 "總重": "-"
             })
@@ -50,3 +50,4 @@ if diamond_file and package_file:
             st.write(f"分包{res['分包編號']}：{res['分配鑽石']}，總重：{res['總重']:.3f}")
         else:
             st.write(f"分包{res['分包編號']}：{res['分配鑽石']}，總重：{res['總重']}")
+
