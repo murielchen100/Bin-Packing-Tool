@@ -13,21 +13,23 @@ if diamond_file and package_file:
     diamonds_df = pd.read_excel(diamond_file)
     packages_df = pd.read_excel(package_file)
 
-    diamonds =diamonds_df['重量']..tolist()
+    # 取出所有石頭重量
+    diamonds = diamonds_df['重量'].tolist()
     results = []
     used_indices = set()
 
     for idx, row in packages_df.iterrows():
         count = int(row['顆數'])
-        target = float(row['總重])
+        target = float(row['總重'])
         found = False
 
+        # 找出所有未被使用的鑽石組合
         available = [i for i in range(len(diamonds)) if i not in used_indices]
         for combo_indices in itertools.combinations(available, count):
             combo = [diamonds[i] for i in combo_indices]
             if abs(sum(combo) - target) <= tolerance:
                 results.append({
-                    "分包編號": idx+1,
+                    "分包編號": row['包裝編號'],
                     "分配鑽石": combo,
                     "總重": sum(combo)
                 })
@@ -37,13 +39,11 @@ if diamond_file and package_file:
 
         if not found:
             results.append({
-                "分包編號": idx+1,
+                "分包編號": row['包裝編號'],
                 "分配鑽石": "找不到符合組合",
                 "總重": "-"
             })
 
     st.write("分配結果：")
     for res in results:
-
         st.write(f"分包{res['分包編號']}：{res['分配鑽石']}，總重：{res['總重']}")
-
