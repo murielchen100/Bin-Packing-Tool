@@ -44,4 +44,5 @@ if diamond_file and package_file:
 
     st.write("分配結果：")
     for res in results:
+
         st.write(f"分包{res['分包編號']}：{res['分配鑽石']}，總重：{res['總重']}")
